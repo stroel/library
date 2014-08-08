@@ -998,6 +998,10 @@ class SpoonFilter
 	 */
 	public static function urlise($value, $charset = null)
 	{
+		$value = Behat\Transliterator\Transliterator::transliterate((string) $value);
+		return Behat\Transliterator\Transliterator::urlize($value);
+
+		/**
 		// define charset
 		$charset = ($charset !== null) ? self::getValue($charset, Spoon::getCharsets(), Spoon::getCharset()) : Spoon::getCharset();
 
@@ -1032,6 +1036,7 @@ class SpoonFilter
 
 		// trim - signs
 		return trim($value, '-');
+		**/
 	}
 }
 

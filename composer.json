@@ -11,6 +11,7 @@
 		}
 	],
 	"require": {
-		"php": ">=5.2.0"
+		"php": ">=5.2.0",
+        "behat/transliterator": "1.0.*"
 	}
 }
