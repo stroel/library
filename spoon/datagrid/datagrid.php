@@ -532,7 +532,11 @@ class SpoonDataGrid
         $html = '';
 
         // loop elements
-        foreach($array as $label => $value) $html .= ' ' . $label . "='" . $value . "'";
+        foreach($array as $label => $value) {
+            $html .= ' ' . ( in_array($label, array('data-extra-params')) ?
+                                $label . "='" . $value . "'" :
+                                $label . '="' . $value . '"' );
+        }
         return $html;
     }
 
