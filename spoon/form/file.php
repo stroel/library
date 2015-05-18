@@ -369,7 +369,7 @@ class SpoonFormFile extends SpoonFormAttributes
 		if(!file_exists(dirname($path))) SpoonDirectory::create(dirname($path));
 
 		// move the file
-		$return = @move_uploaded_file($_FILES[$this->attributes['name']]['tmp_name'], (string) $path);
+		$return = @copy($_FILES[$this->attributes['name']]['tmp_name'], (string) $path);
 
 		// chmod file
 		@chmod($path, $chmod);
