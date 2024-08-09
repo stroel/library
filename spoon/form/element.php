@@ -34,6 +34,12 @@ class SpoonFormElement
 	 */
 	protected $attributes = array();
 
+    /**
+     * Class attribute on error
+     *
+     * @var	string
+     */
+    protected $classError;
 
 	/**
 	 * Name of the form this element is a part of

@@ -1171,7 +1171,7 @@ class SpoonForm
 		{
 			// check, since some objects don't have this method!
 			if(is_callable(array($oElement, 'getErrors'))
-				&& trim($oElement->getErrors()) !== ''
+				&& trim((string) $oElement->getErrors()) !== ''
 			) {
 				$errors[] = $oElement->getErrors();
 			};
@@ -1184,7 +1184,7 @@ class SpoonForm
 		}
 
 		// main form errors?
-		if(trim($this->getErrors()) != '') $this->correct = false;
+		if(trim((string) $this->getErrors()) != '') $this->correct = false;
 
 		// update parsed status
 		$this->validated = true;

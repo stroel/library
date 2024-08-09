@@ -28,14 +28,6 @@
 class SpoonFormInput extends SpoonFormAttributes
 {
 	/**
-	 * Class attribute on error
-	 *
-	 * @var	string
-	 */
-	protected $classError;
-
-
-	/**
 	 * Errors stack
 	 *
 	 * @var	string

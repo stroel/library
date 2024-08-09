@@ -72,9 +72,9 @@ class SpoonFormDropdown extends SpoonFormAttributes
 	/**
 	 * Contains optgroups
 	 *
-	 * @var	bool
+	 * @var	array
 	 */
-	private $optionGroups = false;
+	private $optionGroups = [];
 
 
 	/**

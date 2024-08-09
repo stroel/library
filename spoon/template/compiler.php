@@ -56,6 +56,14 @@ class SpoonTemplateCompiler
 	protected $content;
 
 
+    /**
+     * List of files
+     *
+     * @var	array
+     */
+    protected $files = array();
+
+
 	/**
 	 * Always recompile
 	 *
