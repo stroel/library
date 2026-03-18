@@ -130,6 +130,44 @@ class SpoonThumbnail
 		$this->height = $height;
 	}
 
+    private function fixImageRotation (&$currentImage, &$currentWidth, &$currentHeight, &$newWidth, &$newHeight)
+    {
+        $exif = @exif_read_data($this->filename);
+
+        if (!isset($exif['Orientation'])) {
+            return;
+        }
+
+        $switchWidthAndHeight = false;
+
+        switch ($exif['Orientation']) {
+            case 3:
+                $currentImage = imagerotate($currentImage, 180, 0);
+                break;
+
+            case 6:
+                $currentImage = imagerotate($currentImage, -90, 0);
+                $switchWidthAndHeight = true;
+                break;
+
+            case 8:
+                $currentImage = imagerotate($currentImage, 90, 0);
+                $switchWidthAndHeight = true;
+                break;
+        }
+
+        if ($switchWidthAndHeight !== true) {
+            return;
+        }
+
+        $oldWidth = $currentWidth;
+        $currentWidth = $currentHeight;
+        $currentHeight = $oldWidth;
+
+        $oldWidth = $newWidth;
+        $newWidth = $newHeight;
+        $newHeight = $oldWidth;
+    }
 
 	/**
 	 * Check if file is supported.
@@ -447,6 +485,8 @@ class SpoonThumbnail
 		// validate image
 		if($currentImage === false) throw new SpoonThumbnailException('The file you specified is corrupt.');
 
+        $this->fixImageRotation($currentImage, $currentWidth, $currentHeight, $newWidth, $newHeight);
+
 		// set transparent for current image
 		@imagealphablending($currentImage, false);
 
@@ -566,6 +606,8 @@ class SpoonThumbnail
 			default:
 				throw new SpoonThumbnailException('The file you specified "' . $currentMime . '" is not supported. Only gif, jpeg, jpg and png are supported.');
 		}
+
+        $this->fixImageRotation($currentImage, $currentWidth, $currentHeight, $newWidth, $newHeight);
 
 		// current width is larger then current height
 		if($currentWidth > $currentHeight)
